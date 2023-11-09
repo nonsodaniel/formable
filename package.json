@@ -10,9 +10,9 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^5.3.1",
     "@clerk/nextjs": "^4.26.2",
     "@hookform/resolvers": "^3.3.2",
+    "@prisma/client": "^5.3.1",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
@@ -58,6 +58,7 @@
     "react-day-picker": "^8.9.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.48.2",
+    "react-icons": "^4.11.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.7",

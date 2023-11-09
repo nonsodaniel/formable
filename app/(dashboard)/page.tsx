@@ -1,7 +1,15 @@
-import React from "react";
+import { Suspense } from "react";
+import { Separator } from "@/components/ui/separator";
+import { CardStatsWrapper } from "@/components/stats/StatCardWrap";
+import StatsCards from "@/components/stats/StatCards";
 
-const DashboardPage = () => {
-  return <div>DashboardPage</div>;
-};
-
-export default DashboardPage;
+export default function Home() {
+  return (
+    <div className="container pt-4">
+      <Suspense fallback={<StatsCards loading={true} />}>
+        <CardStatsWrapper />
+      </Suspense>
+      <Separator className="my-6" />
+    </div>
+  );
+}
