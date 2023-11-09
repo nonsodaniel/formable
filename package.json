@@ -10,6 +10,7 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@prisma/client": "^5.3.1",
     "@clerk/nextjs": "^4.26.2",
     "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-accordion": "^1.1.2",
