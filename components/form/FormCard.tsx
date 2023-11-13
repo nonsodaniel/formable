@@ -1,9 +1,13 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { LuView } from "react-icons/lu";
 import { FaWpforms } from "react-icons/fa";
 import { Form } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
 import { formatDistance } from "date-fns";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { BiRightArrowAlt } from "react-icons/bi";
+import { FaEdit } from "react-icons/fa";
 
 const FormCard = ({ form }: { form: Form }) => {
   return (
@@ -31,6 +35,22 @@ const FormCard = ({ form }: { form: Form }) => {
       <CardContent className="h-[20px] truncate text-sm text-muted-foreground">
         {form.description || "No description"}
       </CardContent>
+      <CardFooter>
+        {form.published && (
+          <Button asChild className="w-full mt-2 text-md gap-4">
+            <Link href={`/forms/${form.id}`}>
+              View submissions <BiRightArrowAlt />
+            </Link>
+          </Button>
+        )}
+        {!form.published && (
+          <Button asChild variant={"secondary"} className="w-full mt-2 text-md gap-4">
+            <Link href={`/builder/${form.id}`}>
+              Edit form <FaEdit />
+            </Link>
+          </Button>
+        )}
+      </CardFooter>
     </Card>
   );
 };
