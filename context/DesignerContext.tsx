@@ -6,6 +6,7 @@ import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "re
 type DesignerContextType = {
   elements: FormElementInstance[];
   addElement: (index: number, element: FormElementInstance) => void;
+  setElements: Dispatch<SetStateAction<FormElementInstance[]>>;
   removeElement: (id: string) => void;
   selectedElement: FormElementInstance | null;
   setSelectedElement: Dispatch<SetStateAction<FormElementInstance | null>>;
@@ -36,16 +37,14 @@ const DesignerContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const removeElement = (id: string) => {
-    console.log("called");
-    // setElements((prevElement) => prevElement.filter((el) => el.id !== id));
-    setElements((prev) => prev.filter((element) => element.id !== id));
-    console.log("objs", { id, elements });
+    setElements((prevElement) => prevElement.filter((element) => element.id !== id));
   };
 
   return (
     <DesignerContext.Provider
       value={{
         elements,
+        setElements,
         addElement,
         removeElement,
         selectedElement,
