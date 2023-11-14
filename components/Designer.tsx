@@ -45,11 +45,11 @@ const Designer = () => {
             droppable.isOver && "ring-4 ring-primary ring-inset",
           )}
         >
-          {!droppable.isOver && (
+          {!droppable.isOver && elements.length === 0 && (
             <p className="text-3xl text-muted-foreground flex flex-grow items-center font-bold">Drop here</p>
           )}
 
-          {droppable.isOver && (
+          {droppable.isOver && elements.length === 0 && (
             <div className="p-4 w-full">
               <div className="h-[120px] rounded-md bg-primary/20"></div>
             </div>
@@ -70,7 +70,7 @@ const Designer = () => {
 };
 
 function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
-  const {} = useDesigner();
+  const { removeElement } = useDesigner();
 
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false);
   const topHalf = useDroppable({
@@ -128,7 +128,11 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
               className="flex justify-center h-full border rounded-md rounded-l-none bg-red-500"
               variant={"outline"}
               onClick={(e) => {
-                e.stopPropagation(); // avoid selection of element while deleting
+                //todo: Fix button not clicking
+                console.log("call");
+                e.preventDefault();
+                e.stopPropagation();
+                removeElement(element.id);
               }}
             >
               <BiSolidTrash className="h-6 w-6" />
