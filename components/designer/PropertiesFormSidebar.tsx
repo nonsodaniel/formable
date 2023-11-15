@@ -5,7 +5,7 @@ import { Separator } from "../ui/separator";
 import useDesigner from "@/hooks/useDesigner";
 import { FormElements } from "../form/FormElements";
 
-function PropertiesFormSidebar() {
+const PropertiesFormSidebar = () => {
   const { selectedElement, setSelectedElement } = useDesigner();
   if (!selectedElement) return null;
   const PropertiesForm = FormElements[selectedElement?.type].propertiesComponent;
@@ -27,6 +27,6 @@ function PropertiesFormSidebar() {
       <PropertiesForm elementInstance={selectedElement} />
     </div>
   );
-}
+};
 
 export default PropertiesFormSidebar;
