@@ -52,7 +52,7 @@ const FormBuilder = ({ form }: { form: Form }) => {
     );
   }
   const shareUrl = `${window.location.origin}/submit/${form.shareURL}`;
-  if (!form.published) {
+  if (form.published) {
     return (
       <>
         <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={1000} />
