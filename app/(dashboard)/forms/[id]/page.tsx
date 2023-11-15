@@ -1,26 +1,28 @@
+import { GetFormById, GetFormWithSubmissions } from "@/actions/form";
+import FormLinkShare from "@/components/FormLinkShare";
 import React, { ReactNode } from "react";
-
 import { LuView } from "react-icons/lu";
 import { FaWpforms } from "react-icons/fa";
 import { HiCursorClick } from "react-icons/hi";
 import { TbArrowBounce } from "react-icons/tb";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { formatDistance } from "date-fns";
-import { GetFormById, GetFormWithSubmissions } from "@/actions/form";
+import { format, formatDistance } from "date-fns";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { StatsCard } from "@/components/stats/StatsCard";
 import VisitButton from "@/components/VisitButton";
-import { ElementsType, FormElementInstance } from "@/components/form/FormElements";
-import FormLinkShare from "@/components/FormLinkShare";
+import { FormElementInstance, ElementsType } from "@/components/form/FormElements";
 
-const FormDetailPage = async ({
+async function FormDetailPage({
   params,
 }: {
   params: {
     id: string;
   };
-}) => {
+}) {
   const { id } = params;
   const form = await GetFormById(Number(id));
+
   if (!form) {
     throw new Error("form not found");
   }
@@ -91,7 +93,7 @@ const FormDetailPage = async ({
       </div>
     </>
   );
-};
+}
 
 export default FormDetailPage;
 
@@ -99,8 +101,9 @@ type Row = { [key: string]: string } & {
   submittedAt: Date;
 };
 
-const SubmissionsTable = async ({ id }: { id: number }) => {
+async function SubmissionsTable({ id }: { id: number }) {
   const form = await GetFormWithSubmissions(id);
+  console.log({ form });
 
   if (!form) {
     throw new Error("form not found");
@@ -117,12 +120,20 @@ const SubmissionsTable = async ({ id }: { id: number }) => {
   formElements.forEach((element) => {
     switch (element.type) {
       case "TextField":
+      case "NumberField":
+      case "TextAreaField":
+      case "DateField":
+      case "SelectField":
+      case "CheckboxField":
         columns.push({
           id: element.id,
           label: element.extraAttributes?.label,
           required: element.extraAttributes?.required,
           type: element.type,
         });
+        break;
+      default:
+        break;
     }
   });
 
@@ -134,6 +145,7 @@ const SubmissionsTable = async ({ id }: { id: number }) => {
       submittedAt: submission.createdAt,
     });
   });
+  console.log({ rows });
 
   return (
     <>
@@ -168,10 +180,22 @@ const SubmissionsTable = async ({ id }: { id: number }) => {
       </div>
     </>
   );
-};
+}
 
 function RowCell({ type, value }: { type: ElementsType; value: string }) {
   let node: ReactNode = value;
-  console.log(type);
+
+  switch (type) {
+    case "DateField":
+      if (!value) break;
+      const date = new Date(value);
+      node = <Badge variant={"outline"}>{format(date, "dd/MM/yyyy")}</Badge>;
+      break;
+    case "CheckboxField":
+      const checked = value === "true";
+      node = <Checkbox checked={checked} disabled />;
+      break;
+  }
+
   return <TableCell>{node}</TableCell>;
 }
