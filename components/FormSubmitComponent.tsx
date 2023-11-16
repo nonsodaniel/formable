@@ -6,10 +6,10 @@ import { Button } from "./ui/button";
 import { HiCursorClick } from "react-icons/hi";
 import { toast } from "./ui/use-toast";
 import { ImSpinner2 } from "react-icons/im";
-import { FormElementInstance, FormElements } from "./form/FormElements";
 import { SubmitForm } from "@/actions/form";
+import { FormElementInstance, FormElements } from "./form/FormElements";
 
-const FormSubmitComponent = ({ formUrl, content }: { content: FormElementInstance[]; formUrl: string }) => {
+function FormSubmitComponent({ formUrl, content }: { content: FormElementInstance[]; formUrl: string }) {
   const formValues = useRef<{ [key: string]: string }>({});
   const formErrors = useRef<{ [key: string]: boolean }>({});
   const [renderKey, setRenderKey] = useState(new Date().getTime());
@@ -111,6 +111,6 @@ const FormSubmitComponent = ({ formUrl, content }: { content: FormElementInstanc
       </div>
     </div>
   );
-};
+}
 
 export default FormSubmitComponent;
