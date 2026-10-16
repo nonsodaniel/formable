@@ -17,8 +17,6 @@ const SubmitPage = async ({
     throw new Error("form not found");
   }
 
-  console.log({ formContent });
-
   return <FormSubmitComponent formUrl={params.formUrl} content={formContent} />;
 };
 

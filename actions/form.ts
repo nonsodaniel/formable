@@ -44,7 +44,7 @@ export async function GetFormStats() {
 export async function CreateForm(data: formSchemaType) {
   const validation = formSchema.safeParse(data);
   if (!validation.success) {
-    throw new Error("form not valid");
+    throw new Error("Invalid form data: " + validation.error.message);
   }
 
   const user = await currentUser();
@@ -63,7 +63,7 @@ export async function CreateForm(data: formSchemaType) {
   });
 
   if (!form) {
-    throw new Error("something went wrong");
+    throw new Error("Failed to create form");
   }
 
   return form.id;

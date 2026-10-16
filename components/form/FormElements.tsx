@@ -1,7 +1,7 @@
 import { CheckboxFieldFormElement } from "@/fields/CheckboxField";
 import { DateFieldFormElement } from "@/fields/DateField";
 import { NumberFieldFormElement } from "@/fields/NumberField";
-import { ParagprahFieldFormElement } from "@/fields/ParagraphField";
+import { ParagraphFieldFormElement } from "@/fields/ParagraphField";
 import { SelectFieldFormElement } from "@/fields/SelectField";
 import { SeparatorFieldFormElement } from "@/fields/SeparatorField";
 import { SpacerFieldFormElement } from "@/fields/SpacerField";
@@ -9,6 +9,10 @@ import { SubTitleFieldFormElement } from "@/fields/SubTitleField";
 import { TextAreaFormElement } from "@/fields/TextAreaField";
 import { TextFieldFormElement } from "@/fields/TextField";
 import { TitleFieldFormElement } from "@/fields/TitleField";
+import { EmailFieldFormElement } from "@/fields/EmailField";
+import { PhoneFieldFormElement } from "@/fields/PhoneField";
+import { RadioFieldFormElement } from "@/fields/RadioField";
+import { RatingFieldFormElement } from "@/fields/RatingField";
 
 export type ElementsType =
   | "TextField"
@@ -21,7 +25,11 @@ export type ElementsType =
   | "TextAreaField"
   | "DateField"
   | "SelectField"
-  | "CheckboxField";
+  | "CheckboxField"
+  | "EmailField"
+  | "PhoneField"
+  | "RadioField"
+  | "RatingField";
 
 export type SubmitFunction = (key: string, value: string) => void;
 
@@ -64,7 +72,7 @@ export const FormElements: FormElementsType = {
   TextField: TextFieldFormElement,
   TitleField: TitleFieldFormElement,
   SubTitleField: SubTitleFieldFormElement,
-  ParagraphField: ParagprahFieldFormElement,
+  ParagraphField: ParagraphFieldFormElement,
   SeparatorField: SeparatorFieldFormElement,
   SpacerField: SpacerFieldFormElement,
   NumberField: NumberFieldFormElement,
@@ -72,4 +80,8 @@ export const FormElements: FormElementsType = {
   DateField: DateFieldFormElement,
   SelectField: SelectFieldFormElement,
   CheckboxField: CheckboxFieldFormElement,
+  EmailField: EmailFieldFormElement,
+  PhoneField: PhoneFieldFormElement,
+  RadioField: RadioFieldFormElement,
+  RatingField: RatingFieldFormElement,
 };

@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import { DragEndEvent, useDndMonitor, useDraggable, useDroppable } from "@dnd-kit/core";
 import { cn, uuid } from "@/lib/utils";
 import { Button } from "./ui/button";
-import { BiSolidTrash } from "react-icons/bi";
+import { BiSolidTrash, BiDuplicate } from "react-icons/bi";
 import useDesigner from "@/hooks/useDesigner";
 import { ElementsType, FormElementInstance, FormElements } from "./form/FormElements";
 import DesignerSidebar from "./designer/DesignerSidebar";
 
 function Designer() {
-  const { elements, addElement, selectedElement, setSelectedElement, removeElement } = useDesigner();
+  const { elements, addElement, selectedElement, setSelectedElement, removeElement, updateElement } = useDesigner();
 
   const droppable = useDroppable({
     id: "designer-drop-area",
@@ -112,7 +112,13 @@ function Designer() {
           )}
         >
           {!droppable.isOver && elements.length === 0 && (
-            <p className="text-3xl text-muted-foreground flex flex-grow items-center font-bold">Drop here</p>
+            <div className="flex flex-col flex-grow items-center justify-center gap-3 text-muted-foreground select-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="opacity-30">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+              </svg>
+              <p className="text-xl font-semibold">Start building your form</p>
+              <p className="text-sm">Drag and drop fields from the sidebar</p>
+            </div>
           )}
 
           {droppable.isOver && elements.length === 0 && (
@@ -135,7 +141,7 @@ function Designer() {
 }
 
 function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
-  const { removeElement, selectedElement, setSelectedElement } = useDesigner();
+  const { removeElement, selectedElement, setSelectedElement, elements, addElement } = useDesigner();
 
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false);
   const topHalf = useDroppable({
@@ -189,16 +195,28 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
       <div ref={bottomHalf.setNodeRef} className="absolute  w-full bottom-0 h-1/2 rounded-b-md" />
       {mouseIsOver && (
         <>
-          <div className="absolute right-0 h-full">
+          <div className="absolute right-0 h-full flex flex-col">
             <Button
-              className="flex justify-center h-full border rounded-md rounded-l-none bg-red-500"
+              className="flex justify-center flex-1 border rounded-md rounded-l-none rounded-b-none bg-red-500"
               variant={"outline"}
               onClick={(e) => {
-                e.stopPropagation(); // avoid selection of element while deleting
+                e.stopPropagation();
                 removeElement(element.id);
               }}
             >
-              <BiSolidTrash className="h-6 w-6" />
+              <BiSolidTrash className="h-4 w-4" />
+            </Button>
+            <Button
+              className="flex justify-center flex-1 border rounded-md rounded-l-none rounded-t-none"
+              variant={"outline"}
+              onClick={(e) => {
+                e.stopPropagation();
+                const index = elements.findIndex((el) => el.id === element.id);
+                const clone = { ...element, id: uuid() };
+                addElement(index + 1, clone);
+              }}
+            >
+              <BiDuplicate className="h-4 w-4" />
             </Button>
           </div>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse">
