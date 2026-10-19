@@ -53,31 +53,35 @@ async function FormDetailPage({
       <div className="w-full pt-8 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 container">
         <StatsCard
           title="Total visits"
-          icon={<LuView className="text-muted-foreground" />}
+          icon={<div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30"><LuView className="h-4 w-4 text-blue-600 dark:text-blue-400" /></div>}
           helperText="All time form visits"
           value={visits.toLocaleString() || ""}
           loading={false}
+          className="border-t-2 border-t-blue-500"
         />
         <StatsCard
           title="Total submissions"
-          icon={<FaWpforms className="text-muted-foreground" />}
+          icon={<div className="p-2 rounded-lg bg-violet-100 dark:bg-violet-900/30"><FaWpforms className="h-4 w-4 text-violet-600 dark:text-violet-400" /></div>}
           helperText="All time form submissions"
           value={submissions.toLocaleString() || ""}
           loading={false}
+          className="border-t-2 border-t-violet-500"
         />
         <StatsCard
           title="Submission rate"
-          icon={<HiCursorClick className="text-muted-foreground" />}
+          icon={<div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/30"><HiCursorClick className="h-4 w-4 text-emerald-600 dark:text-emerald-400" /></div>}
           helperText="Visits that result in form submission"
           value={submissionRate.toLocaleString() + "%" || ""}
           loading={false}
+          className="border-t-2 border-t-emerald-500"
         />
         <StatsCard
           title="Bounce rate"
-          icon={<TbArrowBounce className="text-muted-foreground" />}
+          icon={<div className="p-2 rounded-lg bg-amber-100 dark:bg-amber-900/30"><TbArrowBounce className="h-4 w-4 text-amber-600 dark:text-amber-400" /></div>}
           helperText="Visits that leave without interacting"
           value={bounceRate.toLocaleString() + "%" || ""}
           loading={false}
+          className="border-t-2 border-t-amber-500"
         />
       </div>
 

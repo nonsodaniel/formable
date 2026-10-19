@@ -8,15 +8,17 @@ export function StatsCard({
   icon,
   helperText,
   loading,
+  className,
 }: {
   title: string;
   value: string;
   helperText: string;
   loading: boolean;
   icon: ReactNode;
+  className?: string;
 }) {
   return (
-    <Card className="transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
+    <Card className={`transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 ${className ?? ""}`}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
         {icon}

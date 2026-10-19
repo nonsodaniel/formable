@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <Link
       href={"/"}
-      className="font-bold text-xl tracking-tight text-foreground hover:cursor-pointer"
+      className="font-bold text-xl tracking-tight text-primary hover:cursor-pointer"
     >
       Formable
     </Link>

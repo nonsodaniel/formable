@@ -2,7 +2,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { LuView } from "react-icons/lu";
 import { FaWpforms } from "react-icons/fa";
 import { Form } from "@prisma/client";
-import { Badge } from "@/components/ui/badge";
 import { formatDistance } from "date-fns";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -19,9 +18,13 @@ const FormCard = ({ form, animationDelay = "0ms" }: { form: Form; animationDelay
         <CardTitle className="flex items-center gap-2 justify-between">
           <span className="truncate font-semibold text-base">{form.name}</span>
           {form.published ? (
-            <Badge variant="default" className="text-xs">Published</Badge>
+            <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 shrink-0">
+              Published
+            </span>
           ) : (
-            <Badge variant="secondary" className="text-xs">Draft</Badge>
+            <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border border-amber-200 dark:border-amber-800 shrink-0">
+              Draft
+            </span>
           )}
         </CardTitle>
         <CardDescription className="flex items-center justify-between text-xs text-muted-foreground">
@@ -30,9 +33,9 @@ const FormCard = ({ form, animationDelay = "0ms" }: { form: Form; animationDelay
           </span>
           {form.published && (
             <span className="flex items-center gap-2">
-              <LuView className="h-3.5 w-3.5" />
+              <LuView className="h-3.5 w-3.5 text-blue-500" />
               <span>{form.visits.toLocaleString()}</span>
-              <FaWpforms className="h-3.5 w-3.5" />
+              <FaWpforms className="h-3.5 w-3.5 text-violet-500" />
               <span>{form.submissions.toLocaleString()}</span>
             </span>
           )}
@@ -49,7 +52,7 @@ const FormCard = ({ form, animationDelay = "0ms" }: { form: Form; animationDelay
             </Link>
           </Button>
         ) : (
-          <Button asChild variant="outline" className="w-full gap-2" size="sm">
+          <Button asChild variant="outline" className="w-full gap-2 border-primary/30 text-primary hover:bg-primary/5" size="sm">
             <Link href={`/builder/${form.id}`}>
               Edit form <FaEdit />
             </Link>
