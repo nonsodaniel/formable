@@ -10,8 +10,8 @@ import NextTopLoader from "nextjs-toploader";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Formable",
-  description: "A unique form builder",
+  title: "Formable — Form Builder",
+  description: "Create, publish, and track forms with ease.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -18,7 +18,7 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { toast } from "./ui/use-toast";
 import { CreateForm } from "@/actions/form";
-import { BsFileEarmarkPlus } from "react-icons/bs";
+import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { formSchema, formSchemaType } from "@/lib/schemas/form";
 
@@ -32,14 +32,14 @@ function CreateFormBtn() {
     try {
       const formId = await CreateForm(values);
       toast({
-        title: "Success",
-        description: "Form created successfully",
+        title: "Form created",
+        description: "Your new form is ready to edit.",
       });
       router.push(`/builder/${formId}`);
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Something went wrong, please try again later",
+        title: "Something went wrong",
+        description: "Could not create form. Please try again.",
         variant: "destructive",
       });
     }
@@ -48,29 +48,26 @@ function CreateFormBtn() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          variant={"outline"}
-          className="group border border-primary/20 h-[190px] items-center justify-center flex flex-col hover:border-primary hover:cursor-pointer border-dashed gap-4"
-        >
-          <BsFileEarmarkPlus className="h-8 w-8 text-muted-foreground group-hover:text-primary" />
-          <p className="font-bold text-xl text-muted-foreground group-hover:text-primary">Create new form</p>
-        </Button>
+        <button className="group border-2 border-dashed border-border rounded-lg h-[168px] flex flex-col items-center justify-center gap-2 hover:border-primary hover:bg-accent/50 transition-colors cursor-pointer">
+          <Plus className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
+          <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">New form</span>
+        </button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Create form</DialogTitle>
-          <DialogDescription>Create a new form to start collecting responses</DialogDescription>
+          <DialogTitle>Create a new form</DialogTitle>
+          <DialogDescription>Give your form a name and an optional description.</DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pt-2">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Form name</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input placeholder="e.g. Customer feedback" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -81,9 +78,9 @@ function CreateFormBtn() {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Description <span className="text-muted-foreground font-normal">(optional)</span></FormLabel>
                   <FormControl>
-                    <Textarea rows={5} {...field} />
+                    <Textarea rows={3} placeholder="What is this form for?" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -92,9 +89,8 @@ function CreateFormBtn() {
           </form>
         </Form>
         <DialogFooter>
-          <Button onClick={form.handleSubmit(onSubmit)} disabled={form.formState.isSubmitting} className="w-full mt-4">
-            {!form.formState.isSubmitting && <span>Save</span>}
-            {form.formState.isSubmitting && <ImSpinner2 className="animate-spin" />}
+          <Button onClick={form.handleSubmit(onSubmit)} disabled={form.formState.isSubmitting} className="w-full">
+            {form.formState.isSubmitting ? <ImSpinner2 className="animate-spin" /> : "Create form"}
           </Button>
         </DialogFooter>
       </DialogContent>

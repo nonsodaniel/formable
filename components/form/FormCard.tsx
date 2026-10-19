@@ -11,22 +11,25 @@ import { FaEdit } from "react-icons/fa";
 
 const FormCard = ({ form }: { form: Form }) => {
   return (
-    <Card>
+    <Card className="flex flex-col justify-between hover:shadow-md transition-shadow">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 justify-between">
-          <span className="truncate font-bold">{form.name}</span>
-          {form.published && <Badge>Published</Badge>}
-          {!form.published && <Badge variant={"destructive"}>Draft</Badge>}
+          <span className="truncate font-semibold text-base">{form.name}</span>
+          {form.published ? (
+            <Badge variant="default" className="text-xs">Published</Badge>
+          ) : (
+            <Badge variant="secondary" className="text-xs">Draft</Badge>
+          )}
         </CardTitle>
-        <CardDescription className="flex items-center justify-between text-muted-foreground text-sm">
-          {formatDistance(form.createdAt, new Date(), {
-            addSuffix: true,
-          })}
+        <CardDescription className="flex items-center justify-between text-xs text-muted-foreground">
+          <span>
+            {formatDistance(form.createdAt, new Date(), { addSuffix: true })}
+          </span>
           {form.published && (
             <span className="flex items-center gap-2">
-              <LuView className="text-muted-foreground" />
+              <LuView className="h-3.5 w-3.5" />
               <span>{form.visits.toLocaleString()}</span>
-              <FaWpforms className="text-muted-foreground" />
+              <FaWpforms className="h-3.5 w-3.5" />
               <span>{form.submissions.toLocaleString()}</span>
             </span>
           )}
@@ -35,16 +38,15 @@ const FormCard = ({ form }: { form: Form }) => {
       <CardContent className="h-[20px] truncate text-sm text-muted-foreground">
         {form.description || "No description"}
       </CardContent>
-      <CardFooter>
-        {form.published && (
-          <Button asChild className="w-full mt-2 text-md gap-4">
+      <CardFooter className="pt-4">
+        {form.published ? (
+          <Button asChild className="w-full gap-2" size="sm">
             <Link href={`/forms/${form.id}`}>
               View submissions <BiRightArrowAlt />
             </Link>
           </Button>
-        )}
-        {!form.published && (
-          <Button asChild variant={"secondary"} className="w-full mt-2 text-md gap-4">
+        ) : (
+          <Button asChild variant="outline" className="w-full gap-2" size="sm">
             <Link href={`/builder/${form.id}`}>
               Edit form <FaEdit />
             </Link>
