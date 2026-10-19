@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { HiCursorClick } from "react-icons/hi";
 import { toast } from "./ui/use-toast";
 import { ImSpinner2 } from "react-icons/im";
+import { BsCheckCircle } from "react-icons/bs";
 import { SubmitForm } from "@/actions/form";
 import { FormElementInstance, FormElements } from "./form/FormElements";
 
@@ -67,9 +68,12 @@ function FormSubmitComponent({ formUrl, content }: { content: FormElementInstanc
   if (submitted) {
     return (
       <div className="flex justify-center w-full h-full items-center p-8">
-        <div className="max-w-[620px] flex flex-col gap-4 flex-grow bg-background w-full p-8 overflow-y-auto border shadow-sm border rounded">
-          <h1 className="text-2xl font-bold">Form submitted</h1>
-          <p className="text-muted-foreground">Thank you for submitting the form, you can close this page now.</p>
+        <div className="max-w-[480px] flex flex-col items-center gap-4 flex-grow bg-background w-full p-10 border rounded-xl shadow-sm text-center animate-in fade-in-0 zoom-in-95 duration-500">
+          <BsCheckCircle className="h-12 w-12 text-primary" />
+          <h1 className="text-xl font-semibold">Response submitted</h1>
+          <p className="text-sm text-muted-foreground">
+            Your response has been recorded. You can close this page.
+          </p>
         </div>
       </div>
     );
@@ -79,7 +83,7 @@ function FormSubmitComponent({ formUrl, content }: { content: FormElementInstanc
     <div className="flex justify-center w-full h-full items-center p-8">
       <div
         key={renderKey}
-        className="max-w-[620px] flex flex-col gap-4 flex-grow bg-background w-full p-8 overflow-y-auto border shadow-sm border rounded"
+        className="max-w-[620px] flex flex-col gap-4 flex-grow bg-background w-full p-8 overflow-y-auto border shadow-sm rounded-xl animate-in fade-in-0 slide-in-from-bottom-4 duration-500"
       >
         {content.map((element) => {
           const FormElement = FormElements[element.type].formComponent;

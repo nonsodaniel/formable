@@ -48,7 +48,7 @@ function CreateFormBtn() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="group border-2 border-dashed border-border rounded-lg h-[168px] flex flex-col items-center justify-center gap-2 hover:border-primary hover:bg-accent/50 transition-colors cursor-pointer">
+        <button className="group border-2 border-dashed border-border rounded-lg h-[168px] flex flex-col items-center justify-center gap-2 hover:border-primary hover:bg-accent/50 transition-all duration-200 hover:-translate-y-0.5 cursor-pointer">
           <AiOutlinePlus className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
           <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">New form</span>
         </button>

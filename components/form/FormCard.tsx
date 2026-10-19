@@ -9,9 +9,12 @@ import Link from "next/link";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { FaEdit } from "react-icons/fa";
 
-const FormCard = ({ form }: { form: Form }) => {
+const FormCard = ({ form, animationDelay = "0ms" }: { form: Form; animationDelay?: string }) => {
   return (
-    <Card className="flex flex-col justify-between hover:shadow-md transition-shadow">
+    <Card
+      className="flex flex-col justify-between hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 animate-in fade-in-0 slide-in-from-bottom-4 duration-500 fill-mode-both"
+      style={{ animationDelay }}
+    >
       <CardHeader>
         <CardTitle className="flex items-center gap-2 justify-between">
           <span className="truncate font-semibold text-base">{form.name}</span>

@@ -112,8 +112,8 @@ function Designer() {
           )}
         >
           {!droppable.isOver && elements.length === 0 && (
-            <div className="flex flex-col flex-grow items-center justify-center gap-3 text-muted-foreground select-none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="opacity-30">
+            <div className="flex flex-col flex-grow items-center justify-center gap-3 text-muted-foreground select-none animate-in fade-in-0 duration-700">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="opacity-20 animate-pulse" style={{ animationDuration: "3s" }}>
                 <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
               </svg>
               <p className="text-xl font-semibold">Start building your form</p>
@@ -179,7 +179,7 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
       ref={draggable.setNodeRef}
       {...draggable.listeners}
       {...draggable.attributes}
-      className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset"
+      className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset animate-in fade-in-0 slide-in-from-top-2 duration-200"
       onMouseEnter={() => {
         setMouseIsOver(true);
       }}
@@ -227,8 +227,8 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
       {topHalf.isOver && <div className="absolute top-0 w-full rounded-md h-[7px] bg-primary rounded-b-none" />}
       <div
         className={cn(
-          "flex w-full h-[120px] items-center rounded-md bg-accent/40 px-4 py-2 pointer-events-none opacity-100",
-          mouseIsOver && "opacity-30",
+          "flex w-full h-[120px] items-center rounded-md bg-accent/40 px-4 py-2 pointer-events-none transition-opacity duration-150",
+          mouseIsOver ? "opacity-30" : "opacity-100",
         )}
       >
         <DesignerElement elementInstance={element} />

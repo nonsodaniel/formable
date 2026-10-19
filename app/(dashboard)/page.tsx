@@ -8,7 +8,7 @@ import FormCards from "@/components/form/FormCards";
 
 export default function Home() {
   return (
-    <div className="container pt-6 pb-10">
+    <div className="container pt-6 pb-10 animate-in fade-in-0 duration-500">
       <Suspense fallback={<StatsCards loading={true} />}>
         <CardStatsWrapper />
       </Suspense>

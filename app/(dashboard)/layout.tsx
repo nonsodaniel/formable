@@ -6,7 +6,7 @@ import React, { ReactNode } from "react";
 function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="flex flex-col min-h-screen min-w-full bg-background max-h-screen">
-      <nav className="flex justify-between items-center border-b border-border h-[56px] px-6 py-2">
+      <nav className="flex justify-between items-center border-b border-border h-[56px] px-6 py-2 animate-in fade-in-0 duration-300">
         <Logo />
         <div className="flex gap-3 items-center">
           <ThemeSwitcher />

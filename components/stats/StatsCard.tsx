@@ -16,13 +16,13 @@ export function StatsCard({
   icon: ReactNode;
 }) {
   return (
-    <Card>
+    <Card className="transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
         {icon}
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">
+        <div className="text-2xl font-bold tracking-tight">
           {loading && (
             <Skeleton>
               <span className="opacity-0">0</span>

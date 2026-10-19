@@ -6,8 +6,8 @@ const FormCards = async () => {
   const forms = await GetForms();
   return (
     <>
-      {forms.map((form) => (
-        <FormCard key={form.id} form={form} />
+      {forms.map((form, i) => (
+        <FormCard key={form.id} form={form} animationDelay={`${i * 60}ms`} />
       ))}
     </>
   );
