@@ -18,7 +18,7 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { toast } from "./ui/use-toast";
 import { CreateForm } from "@/actions/form";
-import { Plus } from "lucide-react";
+import { AiOutlinePlus } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { formSchema, formSchemaType } from "@/lib/schemas/form";
 
@@ -49,7 +49,7 @@ function CreateFormBtn() {
     <Dialog>
       <DialogTrigger asChild>
         <button className="group border-2 border-dashed border-border rounded-lg h-[168px] flex flex-col items-center justify-center gap-2 hover:border-primary hover:bg-accent/50 transition-colors cursor-pointer">
-          <Plus className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
+          <AiOutlinePlus className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
           <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">New form</span>
         </button>
       </DialogTrigger>

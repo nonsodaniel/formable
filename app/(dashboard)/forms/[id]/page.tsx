@@ -41,7 +41,7 @@ async function FormDetailPage({
     <>
       <div className="py-10 border-b border-muted">
         <div className="flex justify-between container">
-          <h1 className="text-4xl font-bold truncate">{form.name}</h1>
+          <h1 className="text-2xl font-semibold truncate">{form.name}</h1>
           <VisitButton shareUrl={form.shareURL} />
         </div>
       </div>
@@ -53,38 +53,31 @@ async function FormDetailPage({
       <div className="w-full pt-8 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 container">
         <StatsCard
           title="Total visits"
-          icon={<LuView className="text-blue-600" />}
+          icon={<LuView className="text-muted-foreground" />}
           helperText="All time form visits"
           value={visits.toLocaleString() || ""}
           loading={false}
-          className="shadow-md shadow-blue-600"
         />
-
         <StatsCard
           title="Total submissions"
-          icon={<FaWpforms className="text-yellow-600" />}
+          icon={<FaWpforms className="text-muted-foreground" />}
           helperText="All time form submissions"
           value={submissions.toLocaleString() || ""}
           loading={false}
-          className="shadow-md shadow-yellow-600"
         />
-
         <StatsCard
           title="Submission rate"
-          icon={<HiCursorClick className="text-green-600" />}
+          icon={<HiCursorClick className="text-muted-foreground" />}
           helperText="Visits that result in form submission"
           value={submissionRate.toLocaleString() + "%" || ""}
           loading={false}
-          className="shadow-md shadow-green-600"
         />
-
         <StatsCard
           title="Bounce rate"
-          icon={<TbArrowBounce className="text-red-600" />}
-          helperText="Visits that leaves without interacting"
+          icon={<TbArrowBounce className="text-muted-foreground" />}
+          helperText="Visits that leave without interacting"
           value={bounceRate.toLocaleString() + "%" || ""}
           loading={false}
-          className="shadow-md shadow-red-600"
         />
       </div>
 
@@ -124,6 +117,10 @@ async function SubmissionsTable({ id }: { id: number }) {
       case "DateField":
       case "SelectField":
       case "CheckboxField":
+      case "EmailField":
+      case "PhoneField":
+      case "RadioField":
+      case "RatingField":
         columns.push({
           id: element.id,
           label: element.extraAttributes?.label,
@@ -147,7 +144,7 @@ async function SubmissionsTable({ id }: { id: number }) {
 
   return (
     <>
-      <h1 className="text-2xl font-bold my-4">Submissions</h1>
+      <h2 className="text-lg font-semibold mb-4">Submissions</h2>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
